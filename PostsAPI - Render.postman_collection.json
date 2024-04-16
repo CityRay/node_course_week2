@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "ea8e6a28-9163-47d2-b57d-11ffcbb001b9",
+		"name": "PostsAPI - Render",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "131402"
+	},
+	"item": [
+		{
+			"name": "Posts - 取得全部",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/posts",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 新增單筆",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"這是標題哦~\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具\",\r\n    \"description\": \"前言 nuxi\",\r\n    \"tag\": [\"教學\"],\r\n    \"image\": \"https://placehold.co/600x400\",\r\n    \"name\": \"Ray\",\r\n    \"isPublic\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/post",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 刪除單筆",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/post/661e4bf6ae1cb8f6aad5dfc8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post",
+						"661e4bf6ae1cb8f6aad5dfc8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 單筆更新",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"這是標題 Update 666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/post/661e4bf6ae1cb8f6aad5dfc8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post",
+						"661e4bf6ae1cb8f6aad5dfc8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPTIONS",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://node-course-week2.onrender.com",
+			"type": "string"
+		}
+	]
+}
