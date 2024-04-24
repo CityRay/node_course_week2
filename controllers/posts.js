@@ -12,7 +12,12 @@ const posts = {
     try {
       const postData = JSON.parse(body);
 
-      if (postData && postData.title && postData.content) {
+      if (
+        postData &&
+        postData.name.trim() &&
+        postData.title.trim() &&
+        postData.content.trim()
+      ) {
         const newPost = await Post.create(postData);
         handleResponse(res, 200, newPost, '新增成功');
       } else {
@@ -31,9 +36,27 @@ const posts = {
         throw new Error('ID is required');
       }
 
+      const checkId = await Post.findById(_id);
+      if (!checkId) {
+        throw new Error('ID not found');
+      }
+
       const postData = JSON.parse(body);
-      const updatePost = await Post.findByIdAndUpdate(_id, postData);
-      handleResponse(res, 200, { _id: updatePost._id }, '更新成功');
+
+      if (
+        postData &&
+        postData.title &&
+        postData.title.trim() &&
+        postData.content &&
+        postData.content.trim()
+      ) {
+        const updatePost = await Post.findByIdAndUpdate(_id, postData, {
+          new: true
+        });
+        handleResponse(res, 200, updatePost, '更新成功');
+      } else {
+        throw new Error('「title」、「content」欄位是否填寫完整');
+      }
     } catch (error) {
       console.error(error);
       handleResponse(res, 400, null, error.message, error);
@@ -47,12 +70,22 @@ const posts = {
         throw new Error('ID is required');
       }
 
+      const checkId = await Post.findById(_id);
+      if (!checkId) {
+        throw new Error('ID not found');
+      }
+
       await Post.findByIdAndDelete(_id);
       handleResponse(res, 200, [], '刪除成功');
     } catch (error) {
       console.error(error);
       handleResponse(res, 400, null, error.message, error);
     }
+  },
+  // 刪除全部文章
+  async deleteAllPost({ req, res }) {
+    await Post.deleteMany();
+    handleResponse(res, 200, posts, '刪除成功');
   }
 };
 

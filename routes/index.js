@@ -22,6 +22,12 @@ const routes = async (req, res) => {
     return;
   }
 
+  // 刪除全部文章
+  if (url === '/posts' && method === 'DELETE') {
+    req.on('end', async () => PostsControllers.deleteAllPost({ req, res }));
+    return;
+  }
+
   // 刪除文章
   if (url.startsWith('/post/') && method === 'DELETE') {
     PostsControllers.deletePost({ req, res });
